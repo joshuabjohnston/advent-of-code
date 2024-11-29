@@ -8,7 +8,7 @@ using org.jjohnston.aoc.days;
 
 
 
-string strYear = "2023";
+string strYear = "2024";
 string strDay = "1";
 WhichStar theStar = WhichStar.First;
 // WhichStar theStar = WhichStar.Second;
@@ -40,7 +40,7 @@ if (dayType != null)
             }
             catch (NotImplementedException)
             {
-                Console.Out.WriteLine("First Star, not done");
+                Console.Out.WriteLine("First Star, not implemented");
             }
         }
 
@@ -52,7 +52,7 @@ if (dayType != null)
             }
             catch (NotImplementedException)
             {
-                Console.Out.WriteLine("Second Star, not done");
+                Console.Out.WriteLine("Second Star, not implemented");
             }
         }
     }
