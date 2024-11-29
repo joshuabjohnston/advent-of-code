@@ -4,18 +4,26 @@ using org.jjohnston.aoc;
 using org.jjohnston.aoc.year2024;
 
 
-var builder = new ConfigurationBuilder().AddJsonFile("config.json", false);
-var config = builder.Build();
 
-string strCookieSession = config["AOCSessionCookie"] ?? "";
 
-string strYear = "2024";
+
+string strYear = "2023";
 string strDay = "1";
 WhichStar theStar = WhichStar.First;
 // WhichStar theStar = WhichStar.Second;
 ExecType execType = ExecType.Test;
 // ExecType execType = ExecType.FullInput;
 
+
+
+
+
+
+
+
+var builder = new ConfigurationBuilder().AddJsonFile("config.json", false);
+var config = builder.Build();
+string strCookieSession = config["AOCSessionCookie"] ?? "";
 
 Console.Out.WriteLine($"Invoking AOC {strYear}, Day {strDay}.");
 
