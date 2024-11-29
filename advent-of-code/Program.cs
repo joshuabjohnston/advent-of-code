@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.Configuration;
 using org.jjohnston.aoc;
-using org.jjohnston.aoc.year2024;
 
 
 
