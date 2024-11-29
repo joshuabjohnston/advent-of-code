@@ -1,5 +1,5 @@
 bin
 obj
-aoc-2024/puzzleInputs/**
+puzzleInputs
 config.json
 .vscode
