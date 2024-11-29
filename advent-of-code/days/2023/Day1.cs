@@ -10,7 +10,7 @@ public class Day1 : AbstractDay
     {
     }
 
-    public override string Star_1_Impl(string[] inputs)
+    public override string Star_1_Impl(string[] inputs, bool debug)
     {
         int answer = 0;
         
@@ -34,15 +34,16 @@ public class Day1 : AbstractDay
             }
 
             int thisNum = firstNum * 10 + secondNum;
-            // Console.Out.WriteLine($"[[ {thisNum} ]] -- {line}");
+            if (debug) Console.Out.WriteLine($"[[ {thisNum} ]] -- {line}");
             answer += thisNum;
         }
 
         String ans = $"Answer == {answer}";
+        if (debug) Console.Out.WriteLine(ans+"\n");
         return ans;
     }
 
-    public override string Star_2_Impl(String[] inputs)
+    public override string Star_2_Impl(String[] inputs, bool debug)
     {
         throw new NotImplementedException();
     }

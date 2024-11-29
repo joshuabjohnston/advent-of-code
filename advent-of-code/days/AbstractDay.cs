@@ -39,7 +39,7 @@ public abstract class AbstractDay : IDay
         SpecificStarExecution(FileHelpers.ReadStar1Tests, Star_1_Impl);
     }
 
-    protected void SpecificStarExecution(Func<string, string, string[]> fileDelegate, Func<string[], string> starDelegate)
+    protected void SpecificStarExecution(Func<string, string, string[]> fileDelegate, Func<string[], bool, string> starDelegate)
     {
         List<String> testResults = new List<string>();
         // load all the tests and execute them.
@@ -50,7 +50,7 @@ public abstract class AbstractDay : IDay
         {
             if (testLine.Equals(FileHelpers.TestCasesSeparator))
             {
-                String thisTestResults = starDelegate(singleTestCase.ToArray());
+                String thisTestResults = starDelegate(singleTestCase.ToArray(), GlobalConfig.DebugTests);
                 testResults.Add(thisTestResults);
 
                 singleTestCase.Clear();
@@ -64,14 +64,14 @@ public abstract class AbstractDay : IDay
         // so we should execute this last test, which was at the end of the input file.
         if (singleTestCase.Count > 0)
         {
-            String thisTestResults = starDelegate(singleTestCase.ToArray());
+            String thisTestResults = starDelegate(singleTestCase.ToArray(), GlobalConfig.DebugTests);
             testResults.Add(thisTestResults);
 
             singleTestCase.Clear();
         }
 
         // execute the tests
-        String inputResults = starDelegate(this.PuzzleInputs);
+        String inputResults = starDelegate(this.PuzzleInputs, GlobalConfig.DebugInputs);
 
 
         // print out all the results again at the end
@@ -85,7 +85,7 @@ public abstract class AbstractDay : IDay
         Console.Out.WriteLine($"== Input result: {inputResults}");
     }
 
-    public abstract string Star_1_Impl(String[] inputs);
+    public abstract string Star_1_Impl(String[] inputs, bool debug);
 
     public void Star_2()
     {
@@ -94,5 +94,5 @@ public abstract class AbstractDay : IDay
         SpecificStarExecution(FileHelpers.ReadStar2Tests, Star_2_Impl);
     }
 
-    public abstract string Star_2_Impl(String[] inputs);
+    public abstract string Star_2_Impl(String[] inputs, bool debug);
 }
