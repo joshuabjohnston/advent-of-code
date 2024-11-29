@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Microsoft.Extensions.Configuration;
-using aoc2024;
+using org.jjohnston.aoc;
+using org.jjohnston.aoc.year2024;
 
 
 var builder = new ConfigurationBuilder().AddJsonFile("config.json", false);
@@ -8,7 +9,7 @@ var config = builder.Build();
 
 string strCookieSession = config["AOCSessionCookie"] ?? "";
 
-string strYear = "2023";
+string strYear = "2024";
 string strDay = "1";
 WhichStar theStar = WhichStar.First;
 // WhichStar theStar = WhichStar.Second;
@@ -21,8 +22,7 @@ Console.Out.WriteLine($"Invoking AOC {strYear}, Day {strDay}.");
 // do we have inputs?
 String[] execInput = CheckAndFetchPuzzleInputs(strDay, strYear);
 
-// System.Type? dayType = Type.GetType($"aoc{strYear}.Day{strDay}");
-String strType = $"aoc2024.Day{strDay}";
+String strType = $"org.jjohnston.aoc.year{strYear}.Day{strDay}";
 System.Type? dayType = Type.GetType(strType);
 if (dayType != null)
 {

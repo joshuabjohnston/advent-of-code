@@ -1,4 +1,4 @@
-namespace aoc2024;
+namespace org.jjohnston.aoc;
 
 public interface IDay
 {

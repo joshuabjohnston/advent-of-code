@@ -1,5 +1,5 @@
 
-namespace aoc2024;
+namespace org.jjohnston.aoc.year2024;
 
 
 public class Day1 : IDay
