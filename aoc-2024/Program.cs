@@ -1,12 +1,14 @@
-﻿
-
-using System.Reflection;
+﻿using System.Reflection;
+using Microsoft.Extensions.Configuration;
 using aoc2024;
 
 
-string strCookieSession = "session=53616c7465645f5f4289f9104410d6e56436296ce0fa5b8bb1fa3378e97fb36639d5c94267ac61e6a0be6f3fdd88bcb033597f5a7a576b258b989f7dbe8f2837";
+var builder = new ConfigurationBuilder().AddJsonFile("config.json", false);
+var config = builder.Build();
 
-string strYear = "2024";
+string strCookieSession = config["AOCSessionCookie"] ?? "";
+
+string strYear = "2023";
 string strDay = "1";
 WhichStar theStar = WhichStar.First;
 // WhichStar theStar = WhichStar.Second;
@@ -99,7 +101,19 @@ else
 
 String[] CheckAndFetchPuzzleInputs(string day, string year)
 {
-    string inputFileName = $"puzzleInputs/day{day}.txt";
+    string dir = Path.Combine("puzzleInputs", year);
+    if (!Directory.Exists(dir))
+    {
+        Console.Out.WriteLine($"Creating directory {dir}");
+        Directory.CreateDirectory(dir);
+    }
+    else
+    {
+        Console.Out.WriteLine($"{dir} exists.");
+    }
+
+
+    string inputFileName = Path.Combine(dir, $"day{day}.txt");
 
     if (File.Exists(inputFileName))
     {
