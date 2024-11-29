@@ -6,9 +6,3 @@ public enum WhichStar
     Second,
     Both,
 }
-
-public enum ExecType
-{
-    Test,
-    FullInput,
-}
