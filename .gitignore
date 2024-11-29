@@ -1,2 +1,5 @@
 aoc-2024/bin
 aoc-2024/obj
+aoc-2024/puzzleInputs/**
+config.json
+.vscode
