@@ -13,13 +13,26 @@ public abstract class AbstractDay : IDay
     public String[] PuzzleInputs {get; protected set;}
 
 
-    public AbstractDay(string day, string year)
+    public AbstractDay()
     {
-        this.Day = day;
-        this.Year = year;
+        String? fullType = this.GetType().FullName; // org.jjohnston.aoc.yearXXXX.DayNN
+        if (fullType != null)
+        {
+            // Console.Out.WriteLine($"AbstractDay() :: type name = {fullType}");
+            this.Year = fullType.Substring(22, 4);
+            this.Day = fullType.Substring(30);
+            // Console.Out.WriteLine($"AbstractDay() :: year = {this.Year}");
+            // Console.Out.WriteLine($"AbstractDay() :: day = {this.Day}");
+        }
+        else 
+        {
+            throw new NullReferenceException("type's full name is null");
+        }
 
-        FileHelpers.EnsureExistsStarTestFiles(day, year);
-        this.PuzzleInputs = FileHelpers.ReadWithFetchPuzzleInputs(day, year);
+        Console.Out.WriteLine($"Invoking AOC {this.Year}, Day {this.Day}.");
+
+        FileHelpers.EnsureExistsStarTestFiles(this.Day, this.Year);
+        this.PuzzleInputs = FileHelpers.ReadWithFetchPuzzleInputs(this.Day, this.Year);
     }
 
     protected void PrintExecutionHeader(MethodBase? methodBase)

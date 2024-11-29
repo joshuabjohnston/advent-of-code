@@ -24,8 +24,6 @@ var builder = new ConfigurationBuilder().AddJsonFile("config.json", false);
 var config = builder.Build();
 GlobalConfig.AOCAuthCookie = config["AOCSessionCookie"] ?? "unknown";
 
-Console.Out.WriteLine($"Invoking AOC {strYear}, Day {strDay}.");
-
 String strType = $"org.jjohnston.aoc.year{strYear}.Day{strDay}";
 System.Type? dayType = Type.GetType(strType);
 if (dayType != null)
