@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Reflection;
 using System.Security.Cryptography;
 
@@ -54,7 +55,10 @@ public abstract class AbstractDay : IDay
 
     protected void SpecificStarExecution(Func<string, string, string[]> fileDelegate, Func<string[], bool, string> starDelegate)
     {
+        Stopwatch sw = new Stopwatch();
+
         List<String> testResults = new List<string>();
+        List<String> testTimings = new List<string>();
         // load all the tests and execute them.
         String[] allTestLines = fileDelegate(this.Day, this.Year);
         
@@ -63,7 +67,9 @@ public abstract class AbstractDay : IDay
         {
             if (testLine.Equals(FileHelpers.TestCasesSeparator))
             {
+                sw.Restart();
                 String thisTestResults = starDelegate(singleTestCase.ToArray(), GlobalConfig.DebugTests);
+                testTimings.Add(sw.Elapsed.ToString());
                 testResults.Add(thisTestResults);
 
                 singleTestCase.Clear();
@@ -77,25 +83,36 @@ public abstract class AbstractDay : IDay
         // so we should execute this last test, which was at the end of the input file.
         if (singleTestCase.Count > 0)
         {
+            sw.Restart();
             String thisTestResults = starDelegate(singleTestCase.ToArray(), GlobalConfig.DebugTests);
+            testTimings.Add(sw.Elapsed.ToString());
             testResults.Add(thisTestResults);
 
             singleTestCase.Clear();
         }
 
         // execute the tests
+        sw.Restart();
         String inputResults = starDelegate(this.PuzzleInputs, GlobalConfig.DebugInputs);
+        String inputTiming = sw.Elapsed.ToString();
 
+        sw.Stop();
 
         // print out all the results again at the end
         Console.Out.WriteLine();
         int n = 1;
-        foreach (String res in testResults)
+        for (int t = 0; t < testResults.Count; t++)
         {
-            Console.Out.WriteLine($"== Test {n} result: {res}");
+            Console.Out.WriteLine($"== Test {n} result: {testResults[t]}");
+            if (t < testTimings.Count)
+            {
+                Console.Out.WriteLine($"    --  in {testTimings[t]}");
+            }
             ++n;
         }
         Console.Out.WriteLine($"== Input result: {inputResults}");
+        Console.Out.WriteLine($"    --  in {inputTiming}");
+
     }
 
     public abstract string Star_1_Impl(String[] inputs, bool debug);
