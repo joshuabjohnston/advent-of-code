@@ -8,10 +8,10 @@ using org.jjohnston.aoc.days;
 
 
 
-string strYear = "2023";
+string strYear = "2024";
 string strDay = "1";
-WhichStar theStar = WhichStar.First;
-// WhichStar theStar = WhichStar.Second;
+// WhichStar theStar = WhichStar.First;
+WhichStar theStar = WhichStar.Second;
 
 
 
