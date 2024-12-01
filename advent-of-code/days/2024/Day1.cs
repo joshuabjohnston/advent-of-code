@@ -13,13 +13,9 @@ public class Day1 : AbstractDay
 
         foreach (String inp in inputs)
         {
-            int num1End = 0;
-            while (Char.IsDigit(inp[num1End])) ++num1End;
-            list1.Add(int.Parse(inp.Substring(0, num1End)));
+            list1.Add(int.Parse(inp.Substring(0, 5)));
 
-            int num2Beg = inp.Length - 1;
-            while (Char.IsDigit(inp[num2Beg])) --num2Beg;
-            list2.Add(int.Parse(inp.Substring(num2Beg)));
+            list2.Add(int.Parse(inp.Substring(8)));
 
             if (debug) Console.WriteLine($"inp = {inp}     --> [{list1[list1.Count-1]},{list2[list2.Count-1]}]");
         }
@@ -43,23 +39,28 @@ public class Day1 : AbstractDay
         String res = "aoc 2024 day 1, star 2";
 
         List<int> list1 = new List<int>();
-        List<int> list2 = new List<int>();
+        // List<int> list2 = new List<int>();
+        Dictionary<int, int> dict2 = new Dictionary<int, int>();
 
         foreach (String inp in inputs)
         {
-            int num1End = 0;
-            while (Char.IsDigit(inp[num1End])) ++num1End;
-            list1.Add(int.Parse(inp.Substring(0, num1End)));
+            list1.Add(int.Parse(inp.Substring(0, 5)));
 
-            int num2Beg = inp.Length - 1;
-            while (Char.IsDigit(inp[num2Beg])) --num2Beg;
-            list2.Add(int.Parse(inp.Substring(num2Beg)));
+            int n2 = int.Parse(inp.Substring(8));
+            if (dict2.ContainsKey(n2))
+            {
+                dict2[n2] = dict2[n2] + 1;
+            }
+            else
+            {
+                dict2[n2] = 1;
+            }
 
-            if (debug) Console.WriteLine($"inp = {inp}     --> [{list1[list1.Count-1]},{list2[list2.Count-1]}]");
+            if (debug) Console.WriteLine($"inp = {inp}     --> [{list1[list1.Count-1]},{n2}]");
         }
         
-        list1.Sort();
-        list2.Sort();
+        // list1.Sort();
+        // list2.Sort();
 
         int sumSimScore = 0;
         for (int i = 0; i < list1.Count; i++)
@@ -67,7 +68,8 @@ public class Day1 : AbstractDay
             int n1 = list1[i];
 
             // how many times does this appear in list 2?
-            int l2Count = list2.FindAll(x => x == n1).Count;
+            // int l2Count = list2.FindAll(x => x == n1).Count;
+            int l2Count = (dict2.ContainsKey(n1) ? dict2[n1] : 0);
 
             int simScore = n1 * l2Count;
             sumSimScore += simScore;

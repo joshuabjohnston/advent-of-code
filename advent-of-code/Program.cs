@@ -7,6 +7,8 @@ using org.jjohnston.aoc.days;
 
 
 
+GlobalConfig.DebugInputs = false;
+GlobalConfig.DebugTests = false;
 
 string strYear = "2024";
 string strDay = "1";
