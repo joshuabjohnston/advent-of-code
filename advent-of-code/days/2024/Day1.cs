@@ -6,8 +6,6 @@ public class Day1 : AbstractDay
 {
     public override string Star_1_Impl(string[] inputs, bool debug)
     {
-        String res = "aoc 2024 day 1, star 1";
-
         List<int> list1 = new List<int>();
         List<int> list2 = new List<int>();
 
@@ -36,8 +34,6 @@ public class Day1 : AbstractDay
 
     public override string Star_2_Impl(string[] inputs, bool debug)
     {
-        String res = "aoc 2024 day 1, star 2";
-
         List<int> list1 = new List<int>();
         // List<int> list2 = new List<int>();
         Dictionary<int, int> dict2 = new Dictionary<int, int>();

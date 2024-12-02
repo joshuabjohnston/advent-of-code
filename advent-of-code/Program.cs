@@ -13,8 +13,8 @@ GlobalConfig.DebugTests = false;
 
 string strYear = "2024";
 string strDay = "2";
-// WhichStar theStar = WhichStar.First;
-WhichStar theStar = WhichStar.Second;
+WhichStar theStar = WhichStar.First;
+// WhichStar theStar = WhichStar.Second;
 
 
 

@@ -1,5 +1,6 @@
 
 using System.Diagnostics.Tracing;
+using jjohnston_extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Win32;
 using org.jjohnston.aoc.days;
@@ -22,7 +23,8 @@ namespace org.jjohnston.aoc.year2024
             foreach (String input in inputs)
             {
                 string[] strLevels = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-                bool bSafeReport = IsReportSafe(strLevels, debug);                
+                int[] levels = strLevels.ParseInts();
+                bool bSafeReport = IsReportSafe(levels, debug);                
 
                 if (bSafeReport)
                 {
@@ -33,7 +35,7 @@ namespace org.jjohnston.aoc.year2024
             return "Number safe reports == " + nCountSafe;
         }
 
-        public bool IsReportSafe(string[] strLevels, bool debug)
+        public bool IsReportSafe(int[] levels, bool debug)
         {                
             int thisLevel = -999;
             int prevLevel = -999;
@@ -42,18 +44,18 @@ namespace org.jjohnston.aoc.year2024
 
             bool bSafeReport = true;
 
-            for (int i = 1; i < strLevels.Length; i++)
+            for (int i = 1; i < levels.Length; i++)
             {
                 if (prevLevel == -999)
                 {
-                    prevLevel = int.Parse(strLevels[0]);
+                    prevLevel = levels[0];
                 }
                 else
                 {
                     prevLevel = thisLevel;
                     prevDir = thisDir;
                 }
-                thisLevel = int.Parse(strLevels[i]);
+                thisLevel = levels[i];
 
                 thisDir = (thisLevel > prevLevel) ? Direction.Ascending : Direction.Descending;
                 if (prevDir != Direction.Unknown)
@@ -61,7 +63,7 @@ namespace org.jjohnston.aoc.year2024
                     if (thisDir != prevDir)
                     {
                         bSafeReport = false;
-                        if (debug) Console.Out.WriteLine($"{String.Join(' ', strLevels)} -- UNSAFE -- change in direction");
+                        if (debug) Console.Out.WriteLine($"{String.Join(' ', levels)} -- UNSAFE -- change in direction");
                         break;
                     }
                 }
@@ -69,7 +71,7 @@ namespace org.jjohnston.aoc.year2024
                 if (diff < 1 || diff > 3)
                 {
                     bSafeReport = false;
-                    if (debug) Console.Out.WriteLine($"{String.Join(' ', strLevels)} -- UNSAFE -- diff of {diff}");
+                    if (debug) Console.Out.WriteLine($"{String.Join(' ', levels)} -- UNSAFE -- diff of {diff}");
                     break;
                 }
             }
@@ -84,7 +86,8 @@ namespace org.jjohnston.aoc.year2024
             foreach (String input in inputs)
             {
                 string[] strLevels = input.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-                bool bSafeReport = IsReportSafe(strLevels, debug);                
+                int[] levels = strLevels.ParseInts();
+                bool bSafeReport = IsReportSafe(levels, debug);                
 
                 for (int i = 0; i < strLevels.Length && !bSafeReport; i++)
                 {
@@ -93,17 +96,19 @@ namespace org.jjohnston.aoc.year2024
                     // newLevels.RemoveAt(i);
                     // bSafeReport = IsReportSafe(newLevels.ToArray(), debug);
 
-                    string[] newLevels = new string[strLevels.Length - 1];
-                    int newIdx = 0;
-                    for (int j = 0; j < strLevels.Length; j++)
-                    {
-                        if (j == i)
-                        {
-                            continue;
-                        }
-                        newLevels[newIdx] = strLevels[i];
-                        ++newIdx;
-                    }
+                    // string[] newLevels = new string[strLevels.Length - 1];
+                    // int newIdx = 0;
+                    // for (int j = 0; j < strLevels.Length; j++)
+                    // {
+                    //     if (j == i)
+                    //     {
+                    //         continue;
+                    //     }
+                    //     newLevels[newIdx] = strLevels[i];
+                    //     ++newIdx;
+                    // }
+
+                    int[] newLevels = levels.RemoveAt(i);
                     bSafeReport = IsReportSafe(newLevels, debug);
                 }
 

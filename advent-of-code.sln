@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "advent-of-code", "advent-of-code\advent-of-code.csproj", "{0F3E0F43-3269-478E-A1A5-E7F73947CFF6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "jjohnston-extensions", "jjohnston-extensions\jjohnston-extensions.csproj", "{2520A678-016D-4C9B-B260-05FC81FA1FDB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{0F3E0F43-3269-478E-A1A5-E7F73947CFF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F3E0F43-3269-478E-A1A5-E7F73947CFF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F3E0F43-3269-478E-A1A5-E7F73947CFF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2520A678-016D-4C9B-B260-05FC81FA1FDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2520A678-016D-4C9B-B260-05FC81FA1FDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2520A678-016D-4C9B-B260-05FC81FA1FDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2520A678-016D-4C9B-B260-05FC81FA1FDB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
