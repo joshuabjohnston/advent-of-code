@@ -11,9 +11,9 @@ GlobalConfig.DebugInputs = false;
 GlobalConfig.DebugTests = false;
 
 string strYear = "2024";
-string strDay = "1";
-// WhichStar theStar = WhichStar.First;
-WhichStar theStar = WhichStar.Second;
+string strDay = "2";
+WhichStar theStar = WhichStar.First;
+// WhichStar theStar = WhichStar.Second;
 
 
 
