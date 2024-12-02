@@ -1,5 +1,6 @@
 
 using System.Diagnostics.Tracing;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Win32;
 using org.jjohnston.aoc.days;
 
@@ -88,9 +89,22 @@ namespace org.jjohnston.aoc.year2024
                 for (int i = 0; i < strLevels.Length && !bSafeReport; i++)
                 {
                     // throw out level i
-                    List<String> newLevels = new List<string>(strLevels);
-                    newLevels.RemoveAt(i);
-                    bSafeReport = IsReportSafe(newLevels.ToArray(), debug);
+                    // List<String> newLevels = new List<string>(strLevels);
+                    // newLevels.RemoveAt(i);
+                    // bSafeReport = IsReportSafe(newLevels.ToArray(), debug);
+
+                    string[] newLevels = new string[strLevels.Length - 1];
+                    int newIdx = 0;
+                    for (int j = 0; j < strLevels.Length; j++)
+                    {
+                        if (j == i)
+                        {
+                            continue;
+                        }
+                        newLevels[newIdx] = strLevels[i];
+                        ++newIdx;
+                    }
+                    bSafeReport = IsReportSafe(newLevels, debug);
                 }
 
                 if (bSafeReport)

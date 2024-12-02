@@ -70,7 +70,7 @@ public abstract class AbstractDay : IDay
                 sw.Restart();
                 String thisTestResults = starDelegate(singleTestCase.ToArray(), GlobalConfig.DebugTests);
                 sw.Stop();
-                testTimings.Add(sw.ElapsedTicks.ToString());
+                testTimings.Add(sw.Elapsed.ToString());
                 testResults.Add(thisTestResults);
 
                 singleTestCase.Clear();
@@ -87,7 +87,7 @@ public abstract class AbstractDay : IDay
             sw.Restart();
             String thisTestResults = starDelegate(singleTestCase.ToArray(), GlobalConfig.DebugTests);
             sw.Stop();
-            testTimings.Add(sw.ElapsedTicks.ToString());
+            testTimings.Add(sw.Elapsed.ToString());
             testResults.Add(thisTestResults);
 
             singleTestCase.Clear();
@@ -98,7 +98,7 @@ public abstract class AbstractDay : IDay
         String inputResults = starDelegate(this.PuzzleInputs, GlobalConfig.DebugInputs);
         sw.Stop();
 
-        String inputTiming = sw.ElapsedTicks.ToString();
+        String inputTiming = sw.Elapsed.ToString();
 
 
         // print out all the results again at the end
