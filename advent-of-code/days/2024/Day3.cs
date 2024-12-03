@@ -1,3 +1,5 @@
+using System.Security.Cryptography.X509Certificates;
+using System.Text.RegularExpressions;
 using jjohnston_extensions;
 using org.jjohnston.aoc.days;
 
@@ -11,7 +13,17 @@ namespace org.jjohnston.aoc.year2024
 
             foreach (string input in inputs)
             {
-                sumMuls += SumMuls(input, debug, false);
+                // sumMuls += SumMuls(input, debug, false);
+                MatchCollection matches = Regex.Matches(input, @"mul\((\d{1,3}),(\d{1,3})\)");
+                foreach (Match m in matches)
+                {
+                    int x = int.Parse(m.Groups[1].Value);
+                    int y = int.Parse(m.Groups[2].Value);
+
+                    int prod = x * y;
+                    sumMuls += prod;
+                    if (debug) Console.Out.WriteLine($"mul( {x}, {y} ) == {prod}");
+                }
             }
 
             return "sum of muls == " + sumMuls;
@@ -119,9 +131,33 @@ namespace org.jjohnston.aoc.year2024
         {
             int sumMuls = 0;
 
+            bool bDo = true;
+
+
             foreach (string input in inputs)
             {
-                sumMuls += SumMuls(input, debug, true);
+                // sumMuls += SumMuls(input, debug, false);
+                MatchCollection matches = Regex.Matches(input, @"mul\((\d{1,3}),(\d{1,3})\)|do\(\)|don't\(\)");
+                foreach (Match m in matches)
+                {
+                    if (m.Value.StartsWith("mul") && bDo)
+                    {
+                        int x = int.Parse(m.Groups[1].Value);
+                        int y = int.Parse(m.Groups[2].Value);
+
+                        int prod = x * y;
+                        sumMuls += prod;
+                        if (debug) Console.Out.WriteLine($"mul( {x}, {y} ) == {prod}");
+                    }
+                    else if (m.Value.StartsWith("don't"))
+                    {
+                        bDo = false;
+                    }
+                    else if (m.Value.StartsWith("do"))
+                    {
+                        bDo = true;
+                    }
+                }
             }
 
             return "sum of muls == " + sumMuls;
