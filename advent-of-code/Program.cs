@@ -8,11 +8,11 @@ using org.jjohnston.aoc.days;
 
 
 GlobalConfig.DebugInputs = false; 
-GlobalConfig.DebugTests = false;
-// GlobalConfig.DebugTests = true;
+// GlobalConfig.DebugTests = false;
+GlobalConfig.DebugTests = true;
 
 string strYear = "2024";
-string strDay = "3";
+string strDay = "4";
 // WhichStar theStar = WhichStar.First;
 WhichStar theStar = WhichStar.Second;
 
