@@ -1,4 +1,6 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Diagnostics.Tracing;
+using System.Runtime.CompilerServices;
+using System.Text;
 
 namespace jjohnston_extensions;
 
@@ -34,5 +36,28 @@ public static class ArrayExtensions
         }
 
         return newArr;
+    }
+
+    public static void Swap<T>(this T[] array, int i, int j)
+    {
+        T tmp = array[i];
+        array[i] = array[j];
+        array[j] = tmp;
+    }
+
+    public static String GetString<T>(this T[] a)
+    {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < a.Length; i++)
+        {
+            if (i > 0)
+            {
+                sb.Append(", ");
+            }
+            sb.Append(a[i].ToString());
+        }
+
+        return sb.ToString();
     }
 }

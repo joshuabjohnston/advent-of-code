@@ -7,12 +7,12 @@ using org.jjohnston.aoc.days;
 
 
 
-GlobalConfig.DebugInputs = false; 
+GlobalConfig.DebugInputs = false;
 // GlobalConfig.DebugTests = false;
 GlobalConfig.DebugTests = true;
 
 string strYear = "2024";
-string strDay = "4";
+string strDay = "5";
 // WhichStar theStar = WhichStar.First;
 WhichStar theStar = WhichStar.Second;
 
@@ -32,7 +32,7 @@ System.Type? dayType = Type.GetType(strType);
 if (dayType != null)
 {
     IDay? iDay = (IDay?)Activator.CreateInstance(dayType);
-    
+
     if (iDay != null)
     {
         if (theStar == WhichStar.First || theStar == WhichStar.Both)
