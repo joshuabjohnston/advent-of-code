@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.Tracing;
+using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
 using System.Text;
 
@@ -60,4 +61,22 @@ public static class ArrayExtensions
 
         return sb.ToString();
     }
+
+    // public static char[][] ToCharMatrix(this String[] strings)
+    // {
+    //     char[][] matrix = new char[strings.Length][];
+
+    //     for (int r = 0; r < strings.Length; r++)
+    //     {
+    //         matrix[r] = new char[strings[r].Length];
+
+    //         for (int c = 0; c < strings[r].Length; c++)
+    //         {
+    //             matrix[r][c] = strings[r][c];
+    //         }
+    //     }
+
+    //     return matrix;
+    // }
+
 }
