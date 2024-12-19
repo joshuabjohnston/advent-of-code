@@ -77,12 +77,12 @@ public class Day7 : AbstractDay
         }
     }
 
-    public bool CanCalculate(Operation op, bool debug)
+    public bool CanCalculate(Operation op, bool debug, bool bWithConcat)
     {
         List<long> potentialAnswers = new List<long>();
         potentialAnswers.Add(op.Operands[0]);
 
-        if (debug) Console.Out.WriteLine($"  -- op.Answer == {op.Answer}");
+        // if (debug) Console.Out.WriteLine($"  -- op.Answer == {op.Answer}");
 
         for (int o = 1; o < op.Operands.Count(); o++)
         {
@@ -112,6 +112,17 @@ public class Day7 : AbstractDay
                     newValuesToPutOnTheEnd.Add(newTimes);
                     if (debug) Console.Out.WriteLine($" -- {prevAnswer} * {newOp} = {newTimes}");
                 }
+
+                // concatenation is a new operation
+                if (bWithConcat)
+                {
+                    long newCat = long.Parse("" + prevAnswer + newOp);
+                    if (newCat <= op.Answer)
+                    {
+                        newValuesToPutOnTheEnd.Add(newCat);
+                        if (debug) Console.Out.WriteLine($" -- {prevAnswer} || {newOp} = {newCat}");
+                    }
+                }
             }
 
             potentialAnswers.AddRange(newValuesToPutOnTheEnd);
@@ -132,7 +143,7 @@ public class Day7 : AbstractDay
 
             // if (debug) Console.Out.WriteLine($" operand parsed (?{(bParsed ? 'T' : 'F')}) to {op.ToString()}");
 
-            if (CanCalculate(op, debug))
+            if (CanCalculate(op, debug, false))
             {
                 if (debug) Console.Out.WriteLine(" -- CALC!");
                 sumOfCalcOps += op.Answer;
@@ -144,6 +155,23 @@ public class Day7 : AbstractDay
 
     public override string Star_2_Impl(string[] inputs, bool debug)
     {
-        throw new NotImplementedException();
+        long sumOfCalcOps = 0;
+
+        foreach (string s in inputs)
+        {
+            if (debug) Console.Out.WriteLine($"input = {s}");
+            bool bParsed = false;
+            Operation op = Operation.TryParse(out bParsed, s);
+
+            // if (debug) Console.Out.WriteLine($" operand parsed (?{(bParsed ? 'T' : 'F')}) to {op.ToString()}");
+
+            if (CanCalculate(op, debug, true))
+            {
+                if (debug) Console.Out.WriteLine(" -- CALC!");
+                sumOfCalcOps += op.Answer;
+            }
+        }
+
+        return $"sum of calculable operations = {sumOfCalcOps}";
     }
 }
