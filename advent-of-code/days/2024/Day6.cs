@@ -175,6 +175,7 @@ public class Day6 : AbstractDay
     {
         public char[][] Positions { get; set; }
         public List<Deltas>[][] PreviousDirections { get; set; }
+        public List<Coord> ListOfLoopObstructions { get; set; } = new();
         public Coord CurrentPosition { get; set; }
         public Deltas CurrentDirection { get; set; }
 
@@ -353,7 +354,15 @@ public class Day6 : AbstractDay
                 }
             }
 
-            if (resultsInLoop && debug) Console.Out.WriteLine($"Loop found from coord {this.CurrentPosition} while heading {this.CurrentDirection}");
+            if (resultsInLoop)
+            {
+                if (debug) Console.Out.WriteLine($"Loop found from coord {this.CurrentPosition} while heading {this.CurrentDirection}");
+                Coord cInFront = this.CurrentPosition.PeekForward(this.CurrentDirection);
+                if (!ListOfLoopObstructions.Contains(cInFront))
+                {
+                    ListOfLoopObstructions.Add(cInFront);
+                }
+            }
 
             return resultsInLoop;
         }
@@ -450,6 +459,8 @@ public class Day6 : AbstractDay
         // how many 1's are there?
         // countTouchedSpaces = map.CountOccurrences('1');
 
-        return "number loops = " + numLoops;
+        int numObstructions = map.ListOfLoopObstructions.Count();
+
+        return "number loops = " + numLoops + ", unique obstructions = " + numObstructions;
     }
 }
