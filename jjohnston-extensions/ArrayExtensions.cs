@@ -56,7 +56,15 @@ public static class ArrayExtensions
             {
                 sb.Append(", ");
             }
-            sb.Append(a[i].ToString());
+            T t = a[i];
+            if (t != null)
+            {
+                sb.Append(t.ToString());
+            }
+            else
+            {
+                throw new ArgumentNullException("null element in array");
+            }
         }
 
         return sb.ToString();

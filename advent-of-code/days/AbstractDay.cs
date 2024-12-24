@@ -7,11 +7,11 @@ namespace org.jjohnston.aoc.days;
 public abstract class AbstractDay : IDay
 {
 
-    public String Day {get; protected set;}
+    public String Day { get; protected set; }
 
-    public String Year {get; protected set;}
+    public String Year { get; protected set; }
 
-    public String[] PuzzleInputs {get; protected set;}
+    public String[] PuzzleInputs { get; protected set; }
 
 
     public AbstractDay()
@@ -25,7 +25,7 @@ public abstract class AbstractDay : IDay
             // Console.Out.WriteLine($"AbstractDay() :: year = {this.Year}");
             // Console.Out.WriteLine($"AbstractDay() :: day = {this.Day}");
         }
-        else 
+        else
         {
             throw new NullReferenceException("type's full name is null");
         }
@@ -61,8 +61,9 @@ public abstract class AbstractDay : IDay
         List<String> testTimings = new List<string>();
         // load all the tests and execute them.
         String[] allTestLines = fileDelegate(this.Day, this.Year);
-        
+
         List<String> singleTestCase = new List<string>();
+        int n = 1;
         foreach (string testLine in allTestLines)
         {
             if (testLine.Equals(FileHelpers.TestCasesSeparator))
@@ -70,8 +71,11 @@ public abstract class AbstractDay : IDay
                 sw.Restart();
                 String thisTestResults = starDelegate(singleTestCase.ToArray(), GlobalConfig.DebugTests);
                 sw.Stop();
-                testTimings.Add(sw.Elapsed.ToString());
+                String thisTiming = sw.Elapsed.ToString();
+                testTimings.Add(thisTiming);
                 testResults.Add(thisTestResults);
+                PrintResults("Test", n, thisTestResults, thisTiming);
+                n++;
 
                 singleTestCase.Clear();
             }
@@ -103,19 +107,19 @@ public abstract class AbstractDay : IDay
 
         // print out all the results again at the end
         Console.Out.WriteLine();
-        int n = 1;
+        n = 1;
         for (int t = 0; t < testResults.Count; t++)
         {
-            Console.Out.WriteLine($"== Test {n} result: {testResults[t]}");
-            if (t < testTimings.Count)
-            {
-                Console.Out.WriteLine($"    --  in {testTimings[t]}");
-            }
+            PrintResults("Test", n, testResults[t], testTimings[t]);
             ++n;
         }
-        Console.Out.WriteLine($"== Input result: {inputResults}");
-        Console.Out.WriteLine($"    --  in {inputTiming}");
+        PrintResults("Input", -1, inputResults, inputTiming);
+    }
 
+    public void PrintResults(string type, int n, string res, string timing)
+    {
+        Console.Out.WriteLine($"== {type} {((n < 0) ? "" : n + " ")}result: {res}");
+        Console.Out.WriteLine($"    --  in {timing}");
     }
 
     public abstract string Star_1_Impl(String[] inputs, bool debug);
