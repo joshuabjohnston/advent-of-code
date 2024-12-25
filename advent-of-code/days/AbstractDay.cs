@@ -68,16 +68,19 @@ public abstract class AbstractDay : IDay
         {
             if (testLine.Equals(FileHelpers.TestCasesSeparator))
             {
-                sw.Restart();
-                String thisTestResults = starDelegate(singleTestCase.ToArray(), GlobalConfig.DebugTests);
-                sw.Stop();
-                String thisTiming = sw.Elapsed.ToString();
-                testTimings.Add(thisTiming);
-                testResults.Add(thisTestResults);
-                PrintResults("Test", n, thisTestResults, thisTiming);
-                n++;
+                if (singleTestCase.Count() > 0)
+                {
+                    sw.Restart();
+                    String thisTestResults = starDelegate(singleTestCase.ToArray(), GlobalConfig.DebugTests);
+                    sw.Stop();
+                    String thisTiming = sw.Elapsed.ToString();
+                    testTimings.Add(thisTiming);
+                    testResults.Add(thisTestResults);
+                    PrintResults("Test", n, thisTestResults, thisTiming);
+                    n++;
 
-                singleTestCase.Clear();
+                    singleTestCase.Clear();
+                }
             }
             else
             {
