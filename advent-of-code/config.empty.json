@@ -1,3 +1,4 @@
 {
-    "AOCSessionCookie" : "session=paste_your_cookie_here_from_chrome_request_headers"
+    "AOCSessionCookie": "session=paste_your_cookie_here_from_chrome_request_headers",
+    "User-Agent": "what user agent to send with web requests"
 }

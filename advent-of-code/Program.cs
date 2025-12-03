@@ -13,21 +13,22 @@ GlobalConfig.DebugInputs = false;
 // GlobalConfig.DebugTests = false;
 GlobalConfig.DebugTests = true;
 
-string strYear = "2024";
-string strDay = "12";
-// WhichStar theStar = WhichStar.First;
-WhichStar theStar = WhichStar.Second;
+string strYear = "2025";
+string strDay = "1";
+WhichStar theStar = WhichStar.First;
+// WhichStar theStar = WhichStar.Second;
 
 
 
 
 
-
+Console.Out.WriteLine("Advent of Code - Starting Program");
 
 
 var builder = new ConfigurationBuilder().AddJsonFile("config.json", false);
 var config = builder.Build();
 GlobalConfig.AOCAuthCookie = config["AOCSessionCookie"] ?? "unknown";
+GlobalConfig.UserAgent = config["User-Agent"] ?? "unknown";
 
 String strType = $"org.jjohnston.aoc.year{strYear}.Day{strDay}";
 System.Type? dayType = Type.GetType(strType);

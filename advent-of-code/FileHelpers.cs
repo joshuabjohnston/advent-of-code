@@ -12,7 +12,7 @@ public static class FileHelpers
     public static string EnsureExistsInputsDirectories(string day, string year)
     {
         string dir = Path.Combine(BasePuzzleInputsDirectory, year, $"day{day}");
-        
+
         if (!Directory.Exists(dir))
         {
             Console.Out.WriteLine($"Creating directory {dir}");
@@ -49,7 +49,7 @@ public static class FileHelpers
     {
         String dir = EnsureExistsInputsDirectories(day, year);
         String testFile = Path.Combine(dir, specificTestFile);
-        
+
         if (!File.Exists(testFile))
         {
             Console.Out.WriteLine($"! exists {testFile}, creating template");
@@ -82,6 +82,7 @@ public static class FileHelpers
             using (HttpClient client = new HttpClient())
             {
                 client.DefaultRequestHeaders.Add("Cookie", GlobalConfig.AOCAuthCookie);
+                client.DefaultRequestHeaders.Add("User-Agent", GlobalConfig.UserAgent);
 
                 using (Task<Stream> s = client.GetStreamAsync(strURI))
                 {
