@@ -80,7 +80,7 @@ public class Day1 : AbstractDay
                 dial += num;
                 if (dial >= 100)
                 {
-                    ++numZeroes;
+                    if (startingDial != 0) ++numZeroes;
                     dial -= 100;
                 }
             }
@@ -89,7 +89,7 @@ public class Day1 : AbstractDay
                 dial -= num;
                 if (dial < 0)
                 {
-                    ++numZeroes;
+                    if (startingDial != 0) ++numZeroes;
                     dial += 100;
                 }
                 else if (dial == 0)
