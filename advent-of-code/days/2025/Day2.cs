@@ -65,11 +65,11 @@ public class Day2 : AbstractDay
             Int64 low = Int64.Parse(ends[0]);
             Int64 high = Int64.Parse(ends[1]);
 
-            Console.Out.WriteLine($"Range {low} - {high}");
+            if (debug) Console.Out.WriteLine($"Range {low} - {high}");
 
             for (Int64 i = low; i <= high; i++)
             {
-                bool repeatPattern = isIdPatternThatRepeats(i);
+                bool repeatPattern = isIdPatternThatRepeats(i, debug);
                 if (repeatPattern)
                 {
                     sumInvalidIds += i;
@@ -85,8 +85,35 @@ public class Day2 : AbstractDay
         return "sum of invalid IDs = " + sumInvalidIds;
     }
 
-    public bool isIdPatternThatRepeats(Int64 id)
+    public bool isIdPatternThatRepeats(Int64 id, bool debug)
     {
-        return false;
+        String strId = id.ToString();
+
+        // length of pattern can be as long as half the string
+        for (int len = 1; len < strId.Length / 2; len++)
+        {
+            // does this pattern repeat?
+            bool thisPatternWorks = true;
+            string pat = strId.Substring(0, len);
+            for (int i = len; i < strId.Length - len && thisPatternWorks; i++)
+            {
+                string sub = strId.Substring(i, len);
+                if (pat.Equals(sub))
+                {
+                    // yay
+                }
+                else
+                {
+                    thisPatternWorks = false;
+                }
+            }
+
+            if (thisPatternWorks)
+            {
+                return true;
+            }
+        }
+
+        return true;
     }
 }
