@@ -69,16 +69,16 @@ public class Day2 : AbstractDay
 
             for (Int64 i = low; i <= high; i++)
             {
-                bool repeatPattern = isIdPatternThatRepeats(i, debug);
+                if (debug) Console.Out.WriteLine($"\t{i} ->");
+
+                bool repeatPattern = isIdPatternThatRepeats(i, false);
                 if (repeatPattern)
                 {
                     sumInvalidIds += i;
                 }
 
-                if (debug)
-                {
-                    Console.Out.WriteLine($"\t{i} -> {(repeatPattern ? "yes" : "no")}");
-                }
+                if (debug) Console.Out.WriteLine($"\t\t-> {(repeatPattern ? "yes" : "no")}");
+
             }
         }
 
@@ -90,12 +90,21 @@ public class Day2 : AbstractDay
         String strId = id.ToString();
 
         // length of pattern can be as long as half the string
-        for (int len = 1; len < strId.Length / 2; len++)
+        for (int len = 1; len <= strId.Length / 2; len++)
         {
             // does this pattern repeat?
             bool thisPatternWorks = true;
             string pat = strId.Substring(0, len);
-            for (int i = len; i < strId.Length - len && thisPatternWorks; i++)
+
+            if (debug) Console.Out.WriteLine($"\t\tPattern = {pat}");
+
+            if (strId.Length % len != 0)
+            {
+                if (debug) Console.Out.WriteLine($"\t\t\t{len} doesn't fit nicely into str len {strId.Length}.");
+                thisPatternWorks = false;
+            }
+
+            for (int i = len; i <= strId.Length - len && thisPatternWorks; i += len)
             {
                 string sub = strId.Substring(i, len);
                 if (pat.Equals(sub))
@@ -106,6 +115,7 @@ public class Day2 : AbstractDay
                 {
                     thisPatternWorks = false;
                 }
+                if (debug) Console.Out.WriteLine($"\t\t\t.equals('{sub}') from {i}? {thisPatternWorks}");
             }
 
             if (thisPatternWorks)
@@ -114,6 +124,6 @@ public class Day2 : AbstractDay
             }
         }
 
-        return true;
+        return false;
     }
 }
