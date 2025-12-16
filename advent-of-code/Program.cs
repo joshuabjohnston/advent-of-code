@@ -15,8 +15,8 @@ GlobalConfig.DebugTests = true;
 
 string strYear = "2025";
 string strDay = "5";
-WhichStar theStar = WhichStar.First;
-// WhichStar theStar = WhichStar.Second;
+// WhichStar theStar = WhichStar.First;
+WhichStar theStar = WhichStar.Second;
 
 
 
