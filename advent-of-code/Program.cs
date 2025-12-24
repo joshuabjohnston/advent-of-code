@@ -8,7 +8,7 @@ using org.jjohnston.aoc.days;
 
 
 GlobalConfig.DebugInputs = false;
-// GlobalConfig.DebugInputs = true;
+GlobalConfig.DebugInputs = true;
 
 // GlobalConfig.DebugTests = false;
 GlobalConfig.DebugTests = true;
